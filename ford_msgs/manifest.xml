@@ -1,0 +1,18 @@
+<package>
+  <description brief="ford_msgs">
+
+     ford_msgs
+
+  </description>
+  <author>Ted Ian</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/ford_msgs</url>
+  <depend package="std_msgs"/>
+  <depend package="geometry_msgs"/>
+  <depend package="sensor_msgs"/>
+  <depend package="roscpp"/>
+
+</package>
+
+

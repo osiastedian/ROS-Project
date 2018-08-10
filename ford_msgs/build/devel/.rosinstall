@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/ted/ROS/sandbox/ford_msgs/build/devel/setup.sh

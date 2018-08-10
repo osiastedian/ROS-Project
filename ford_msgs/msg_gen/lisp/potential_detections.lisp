@@ -1,0 +1,217 @@
+; Auto-generated. Do not edit!
+
+
+(cl:in-package ford_msgs-msg)
+
+
+;//! \htmlinclude potential_detections.msg.html
+
+(cl:defclass <potential_detections> (roslisp-msg-protocol:ros-message)
+  ((header
+    :reader header
+    :initarg :header
+    :type std_msgs-msg:Header
+    :initform (cl:make-instance 'std_msgs-msg:Header))
+   (scores
+    :reader scores
+    :initarg :scores
+    :type (cl:vector cl:float)
+   :initform (cl:make-array 0 :element-type 'cl:float :initial-element 0.0))
+   (detections
+    :reader detections
+    :initarg :detections
+    :type (cl:vector cl:integer)
+   :initform (cl:make-array 0 :element-type 'cl:integer :initial-element 0))
+   (class_strings
+    :reader class_strings
+    :initarg :class_strings
+    :type (cl:vector cl:string)
+   :initform (cl:make-array 0 :element-type 'cl:string :initial-element ""))
+   (pincer_obs
+    :reader pincer_obs
+    :initarg :pincer_obs
+    :type (cl:vector cl:integer)
+   :initform (cl:make-array 0 :element-type 'cl:integer :initial-element 0)))
+)
+
+(cl:defclass potential_detections (<potential_detections>)
+  ())
+
+(cl:defmethod cl:initialize-instance :after ((m <potential_detections>) cl:&rest args)
+  (cl:declare (cl:ignorable args))
+  (cl:unless (cl:typep m 'potential_detections)
+    (roslisp-msg-protocol:msg-deprecation-warning "using old message class name ford_msgs-msg:<potential_detections> is deprecated: use ford_msgs-msg:potential_detections instead.")))
+
+(cl:ensure-generic-function 'header-val :lambda-list '(m))
+(cl:defmethod header-val ((m <potential_detections>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader ford_msgs-msg:header-val is deprecated.  Use ford_msgs-msg:header instead.")
+  (header m))
+
+(cl:ensure-generic-function 'scores-val :lambda-list '(m))
+(cl:defmethod scores-val ((m <potential_detections>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader ford_msgs-msg:scores-val is deprecated.  Use ford_msgs-msg:scores instead.")
+  (scores m))
+
+(cl:ensure-generic-function 'detections-val :lambda-list '(m))
+(cl:defmethod detections-val ((m <potential_detections>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader ford_msgs-msg:detections-val is deprecated.  Use ford_msgs-msg:detections instead.")
+  (detections m))
+
+(cl:ensure-generic-function 'class_strings-val :lambda-list '(m))
+(cl:defmethod class_strings-val ((m <potential_detections>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader ford_msgs-msg:class_strings-val is deprecated.  Use ford_msgs-msg:class_strings instead.")
+  (class_strings m))
+
+(cl:ensure-generic-function 'pincer_obs-val :lambda-list '(m))
+(cl:defmethod pincer_obs-val ((m <potential_detections>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader ford_msgs-msg:pincer_obs-val is deprecated.  Use ford_msgs-msg:pincer_obs instead.")
+  (pincer_obs m))
+(cl:defmethod roslisp-msg-protocol:serialize ((msg <potential_detections>) ostream)
+  "Serializes a message object of type '<potential_detections>"
+  (roslisp-msg-protocol:serialize (cl:slot-value msg 'header) ostream)
+  (cl:let ((__ros_arr_len (cl:length (cl:slot-value msg 'scores))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) __ros_arr_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) __ros_arr_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) __ros_arr_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) __ros_arr_len) ostream))
+  (cl:map cl:nil #'(cl:lambda (ele) (cl:let ((bits (roslisp-utils:encode-double-float-bits ele)))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 32) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 40) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 48) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 56) bits) ostream)))
+   (cl:slot-value msg 'scores))
+  (cl:let ((__ros_arr_len (cl:length (cl:slot-value msg 'detections))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) __ros_arr_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) __ros_arr_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) __ros_arr_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) __ros_arr_len) ostream))
+  (cl:map cl:nil #'(cl:lambda (ele) (cl:write-byte (cl:ldb (cl:byte 8 0) ele) ostream)
+  (cl:write-byte (cl:ldb (cl:byte 8 8) ele) ostream)
+  (cl:write-byte (cl:ldb (cl:byte 8 16) ele) ostream)
+  (cl:write-byte (cl:ldb (cl:byte 8 24) ele) ostream))
+   (cl:slot-value msg 'detections))
+  (cl:let ((__ros_arr_len (cl:length (cl:slot-value msg 'class_strings))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) __ros_arr_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) __ros_arr_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) __ros_arr_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) __ros_arr_len) ostream))
+  (cl:map cl:nil #'(cl:lambda (ele) (cl:let ((__ros_str_len (cl:length ele)))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) __ros_str_len) ostream))
+  (cl:map cl:nil #'(cl:lambda (c) (cl:write-byte (cl:char-code c) ostream)) ele))
+   (cl:slot-value msg 'class_strings))
+  (cl:let ((__ros_arr_len (cl:length (cl:slot-value msg 'pincer_obs))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) __ros_arr_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) __ros_arr_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) __ros_arr_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) __ros_arr_len) ostream))
+  (cl:map cl:nil #'(cl:lambda (ele) (cl:write-byte (cl:ldb (cl:byte 8 0) ele) ostream)
+  (cl:write-byte (cl:ldb (cl:byte 8 8) ele) ostream)
+  (cl:write-byte (cl:ldb (cl:byte 8 16) ele) ostream)
+  (cl:write-byte (cl:ldb (cl:byte 8 24) ele) ostream))
+   (cl:slot-value msg 'pincer_obs))
+)
+(cl:defmethod roslisp-msg-protocol:deserialize ((msg <potential_detections>) istream)
+  "Deserializes a message object of type '<potential_detections>"
+  (roslisp-msg-protocol:deserialize (cl:slot-value msg 'header) istream)
+  (cl:let ((__ros_arr_len 0))
+    (cl:setf (cl:ldb (cl:byte 8 0) __ros_arr_len) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 8) __ros_arr_len) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 16) __ros_arr_len) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 24) __ros_arr_len) (cl:read-byte istream))
+  (cl:setf (cl:slot-value msg 'scores) (cl:make-array __ros_arr_len))
+  (cl:let ((vals (cl:slot-value msg 'scores)))
+    (cl:dotimes (i __ros_arr_len)
+    (cl:let ((bits 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 32) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 40) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 48) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 56) bits) (cl:read-byte istream))
+    (cl:setf (cl:aref vals i) (roslisp-utils:decode-double-float-bits bits))))))
+  (cl:let ((__ros_arr_len 0))
+    (cl:setf (cl:ldb (cl:byte 8 0) __ros_arr_len) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 8) __ros_arr_len) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 16) __ros_arr_len) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 24) __ros_arr_len) (cl:read-byte istream))
+  (cl:setf (cl:slot-value msg 'detections) (cl:make-array __ros_arr_len))
+  (cl:let ((vals (cl:slot-value msg 'detections)))
+    (cl:dotimes (i __ros_arr_len)
+    (cl:setf (cl:ldb (cl:byte 8 0) (cl:aref vals i)) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 8) (cl:aref vals i)) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 16) (cl:aref vals i)) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 24) (cl:aref vals i)) (cl:read-byte istream)))))
+  (cl:let ((__ros_arr_len 0))
+    (cl:setf (cl:ldb (cl:byte 8 0) __ros_arr_len) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 8) __ros_arr_len) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 16) __ros_arr_len) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 24) __ros_arr_len) (cl:read-byte istream))
+  (cl:setf (cl:slot-value msg 'class_strings) (cl:make-array __ros_arr_len))
+  (cl:let ((vals (cl:slot-value msg 'class_strings)))
+    (cl:dotimes (i __ros_arr_len)
+    (cl:let ((__ros_str_len 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:aref vals i) (cl:make-string __ros_str_len))
+      (cl:dotimes (__ros_str_idx __ros_str_len msg)
+        (cl:setf (cl:char (cl:aref vals i) __ros_str_idx) (cl:code-char (cl:read-byte istream))))))))
+  (cl:let ((__ros_arr_len 0))
+    (cl:setf (cl:ldb (cl:byte 8 0) __ros_arr_len) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 8) __ros_arr_len) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 16) __ros_arr_len) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 24) __ros_arr_len) (cl:read-byte istream))
+  (cl:setf (cl:slot-value msg 'pincer_obs) (cl:make-array __ros_arr_len))
+  (cl:let ((vals (cl:slot-value msg 'pincer_obs)))
+    (cl:dotimes (i __ros_arr_len)
+    (cl:setf (cl:ldb (cl:byte 8 0) (cl:aref vals i)) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 8) (cl:aref vals i)) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 16) (cl:aref vals i)) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 24) (cl:aref vals i)) (cl:read-byte istream)))))
+  msg
+)
+(cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql '<potential_detections>)))
+  "Returns string type for a message object of type '<potential_detections>"
+  "ford_msgs/potential_detections")
+(cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql 'potential_detections)))
+  "Returns string type for a message object of type 'potential_detections"
+  "ford_msgs/potential_detections")
+(cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<potential_detections>)))
+  "Returns md5sum for a message object of type '<potential_detections>"
+  "f9ffa88f6b74a8b1030d56ef4a86d508")
+(cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'potential_detections)))
+  "Returns md5sum for a message object of type 'potential_detections"
+  "f9ffa88f6b74a8b1030d56ef4a86d508")
+(cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<potential_detections>)))
+  "Returns full string definition for message of type '<potential_detections>"
+  (cl:format cl:nil "Header header~%float64[] scores~%uint32[] detections~%string[] class_strings~%uint32[] pincer_obs~%================================================================================~%MSG: std_msgs/Header~%# Standard metadata for higher-level stamped data types.~%# This is generally used to communicate timestamped data ~%# in a particular coordinate frame.~%# ~%# sequence ID: consecutively increasing ID ~%uint32 seq~%#Two-integer timestamp that is expressed as:~%# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')~%# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')~%# time-handling sugar is provided by the client library~%time stamp~%#Frame this data is associated with~%# 0: no frame~%# 1: global frame~%string frame_id~%~%~%"))
+(cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'potential_detections)))
+  "Returns full string definition for message of type 'potential_detections"
+  (cl:format cl:nil "Header header~%float64[] scores~%uint32[] detections~%string[] class_strings~%uint32[] pincer_obs~%================================================================================~%MSG: std_msgs/Header~%# Standard metadata for higher-level stamped data types.~%# This is generally used to communicate timestamped data ~%# in a particular coordinate frame.~%# ~%# sequence ID: consecutively increasing ID ~%uint32 seq~%#Two-integer timestamp that is expressed as:~%# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')~%# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')~%# time-handling sugar is provided by the client library~%time stamp~%#Frame this data is associated with~%# 0: no frame~%# 1: global frame~%string frame_id~%~%~%"))
+(cl:defmethod roslisp-msg-protocol:serialization-length ((msg <potential_detections>))
+  (cl:+ 0
+     (roslisp-msg-protocol:serialization-length (cl:slot-value msg 'header))
+     4 (cl:reduce #'cl:+ (cl:slot-value msg 'scores) :key #'(cl:lambda (ele) (cl:declare (cl:ignorable ele)) (cl:+ 8)))
+     4 (cl:reduce #'cl:+ (cl:slot-value msg 'detections) :key #'(cl:lambda (ele) (cl:declare (cl:ignorable ele)) (cl:+ 4)))
+     4 (cl:reduce #'cl:+ (cl:slot-value msg 'class_strings) :key #'(cl:lambda (ele) (cl:declare (cl:ignorable ele)) (cl:+ 4 (cl:length ele))))
+     4 (cl:reduce #'cl:+ (cl:slot-value msg 'pincer_obs) :key #'(cl:lambda (ele) (cl:declare (cl:ignorable ele)) (cl:+ 4)))
+))
+(cl:defmethod roslisp-msg-protocol:ros-message-to-list ((msg <potential_detections>))
+  "Converts a ROS message object to a list"
+  (cl:list 'potential_detections
+    (cl:cons ':header (header msg))
+    (cl:cons ':scores (scores msg))
+    (cl:cons ':detections (detections msg))
+    (cl:cons ':class_strings (class_strings msg))
+    (cl:cons ':pincer_obs (pincer_obs msg))
+))

@@ -1,0 +1,19 @@
+(cl:defpackage sample_action_server-msg
+  (:use )
+  (:export
+   "<TURNGOAL>"
+   "TURNGOAL"
+   "<TURNRESULT>"
+   "TURNRESULT"
+   "<TURNACTION>"
+   "TURNACTION"
+   "<TURNACTIONRESULT>"
+   "TURNACTIONRESULT"
+   "<TURNACTIONFEEDBACK>"
+   "TURNACTIONFEEDBACK"
+   "<TURNACTIONGOAL>"
+   "TURNACTIONGOAL"
+   "<TURNFEEDBACK>"
+   "TURNFEEDBACK"
+  ))
+

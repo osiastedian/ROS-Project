@@ -1,0 +1,17 @@
+<package>
+  <description brief="obstacle_avoid">
+
+     obstacle_avoid
+
+  </description>
+  <author>Ted Ian</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/obstacle_avoid</url>
+  <depend package="std_msgs"/>
+  <depend package="ford_msgs"/>
+  <depend package="rospy"/>
+
+</package>
+
+
