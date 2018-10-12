@@ -9,7 +9,9 @@
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/obstacle_avoid</url>
   <depend package="std_msgs"/>
-  <depend package="ford_msgs"/>
+  <depend package="geometry_msgs"/>
+  <depend package="sensor_msgs"/>
+  <!-- <depend package="ford_msgs"/> -->
   <depend package="rospy"/>
 
 </package>
