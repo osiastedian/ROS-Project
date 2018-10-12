@@ -5,6 +5,8 @@ import sys
 from std_msgs.msg import Float32, ColorRGBA, Int32
 from geometry_msgs.msg import PoseStamped, Twist, Vector3, Point
 from visualization_msgs.msg import Marker, MarkerArray
+import roslib; roslib.load_manifest('obstacle_avoid')
+from obstacle_avoid.msg import AgentList,Agent
 
 import numpy as np
 
@@ -24,23 +26,52 @@ class CollisionAvoid:
         #Publisher
         self.pub_twist = rospy.Publisher('mitsumi_twist',Twist,queue_size=1)
         self.pub_pose_marker = rospy.Publisher('mitsumi_pose_marker',Marker,queue_size=1)
+        self.pub_agent_markers = rospy.Publisher('mitsumi_agent_markers',MarkerArray,queue_size=1)
         #Subscriber
         self.sub_pose = rospy.Subscriber('mitsumi_pose',PoseStamped,self.cbPose)
         self.sub_global_goal = rospy.Subscriber('mitsumi_goal',PoseStamped, self.cbGoal)
         self.sub_vel = rospy.Subscriber('mitsumi_velocity',Vector3,self.cbVel)
-        self.sub_vel = rospy.Subscriber('mitsumi_obstacles',Vector3,self.cbVel)
-
+        self.sub_obstacles = rospy.Subscriber('mitsumi_obstacles',AgentList,self.cbObstacles)
         self.heading_angle = 0
         self.start_x = 0
         self.start_y = 0
-        self.goal_x = 5
-        self.goal_y = 5
+        self.goal_x = 10
+        self.goal_y = 3
         self.radius = radius
         self.pref_speed = 1.2
         self.velocity_x = 0
         self.velocity_y = 0
         self.nn_timer = rospy.Timer(rospy.Duration(0.1),self.start)
         self.num_poses = 1
+        self.other_agents_x =  []
+        self.other_agents_y =  []
+        self.other_agents_r =  []
+        self.other_agents_vx = []
+        self.other_agents_vy = []
+
+        agentList = AgentList()
+        sample = Agent()
+        sample.position.x = 4
+        sample.position.y = 2
+        sample.radius = 0.5
+        sample.velocity.x = 0
+        sample.velocity.y = 0
+        agentList.list.append(sample)
+        sample2 = Agent()
+        sample2.position.x = 7
+        sample2.position.y = -1
+        sample2.radius = 0.5
+        sample2.velocity.x = 0
+        sample2.velocity.y = 0
+        agentList.list.append(sample2)
+        sample3 = Agent()
+        sample3.position.x = 6
+        sample3.position.y = 1.5
+        sample3.radius = 0.5
+        sample3.velocity.x = 0
+        sample3.velocity.y = 0
+        agentList.list.append(sample3)
+        self.cbObstacles(agentList)
 
     def start(self,event):
         action = self.run()
@@ -61,7 +92,21 @@ class CollisionAvoid:
         goalPose.pose.position.x = self.goal_x
         goalPose.pose.position.y = self.goal_y
         self.visualize_goal(goalPose.pose.position,goalPose.pose.orientation)
-        
+        self.visualize_other_agents(self.other_agents_x, self.other_agents_y,self.other_agents_r)
+    
+    def cbObstacles(self, agentList):
+        self.other_agents_x =  []
+        self.other_agents_y =  []
+        self.other_agents_r =  []
+        self.other_agents_vx = []
+        self.other_agents_vy = []
+        for agent in agentList.list:
+            self.other_agents_x.append(agent.position.x)
+            self.other_agents_y.append(agent.position.y)
+            self.other_agents_r.append(agent.radius)
+            self.other_agents_vx.append(agent.velocity.x)
+            self.other_agents_vy.append(agent.velocity.y)
+
     def cbPose(self, msg):
         self.num_poses+=1
         print("RECEIVED POSE")
@@ -72,6 +117,25 @@ class CollisionAvoid:
         self.start_y = poseStamp.pose.position.y
         self.visualize_pose(msg.pose.position,msg.pose.orientation)
 
+    def visualize_other_agents(self,xs,ys,radii):
+        markers = MarkerArray()
+        for i in range(len(xs)):
+            # Orange box for other agent
+            marker = Marker()
+            marker.header.stamp = rospy.Time.now()
+            marker.header.frame_id = 'map'
+            marker.ns = 'other_agent'
+            marker.id = i
+            marker.type = marker.CYLINDER
+            marker.action = marker.ADD
+            marker.pose.position.x = xs[i]
+            marker.pose.position.y = ys[i]
+            # marker.pose.orientation = orientation
+            marker.scale = Vector3(x=2*radii[i],y=2*radii[i],z=1)
+            marker.color = ColorRGBA(r=1.0,g=0.4,a=1.0)
+            marker.lifetime = rospy.Duration(0.1)
+            markers.markers.append(marker)
+        self.pub_agent_markers.publish(markers)
     
     def visualize_goal(self,pos,orientation):
         marker = Marker()
@@ -148,11 +212,11 @@ class CollisionAvoid:
         host_agent = agent.Agent(self.start_x, self.start_y, self.goal_x, self.goal_y, self.radius, self.pref_speed, self.heading_angle, index)
         host_agent.vel_global_frame = np.array([self.velocity_x, self.velocity_y])
         # Sample observation data in a format easily generated from sensors
-        other_agents_x =  [  4,   7]
-        other_agents_y =  [  2,   2]
-        other_agents_r =  [  1,   2.5]
-        other_agents_vx = [  0,   0]
-        other_agents_vy = [  0,   0]
+        other_agents_x =  self.other_agents_x #[  4,   7]
+        other_agents_y =  self.other_agents_y#[  2,   2]
+        other_agents_r =  self.other_agents_r#[  1,   2.5]
+        other_agents_vx = self.other_agents_vx#[  0,   0]
+        other_agents_vy = self.other_agents_y#[  0,   0]
         num_other_agents = len(other_agents_x)
 
         # Create Agent objects for each observed dynamic obstacle

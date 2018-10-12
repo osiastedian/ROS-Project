@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/ted/ROS/sandbox/obstacle_avoid/build/devel/setup.sh
