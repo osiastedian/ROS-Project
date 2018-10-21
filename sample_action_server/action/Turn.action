@@ -1,8 +1,0 @@
-#goal
-int64 turnId
----
-#result
-int64 angle
-----
-#feedback
-int64 currentAngle
